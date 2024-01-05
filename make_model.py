@@ -15,6 +15,7 @@ sound_file = '/Users/work/Documents/oven.mp3'
 start_time = time.time()
 
 model = YOLO('yolov8n.pt') # Nano model
+# Training on mac book
 model.to('mps')
 model.train(data='config.yaml', epochs=5, device='mps')
 
