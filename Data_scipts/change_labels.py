@@ -1,3 +1,11 @@
+import os
+from pathlib import Path
+from PIL import Image
+import shutil
+import random
+import xml.etree.ElementTree as ET
+import cv2
+
 def convert_xml_to_yolo(xml_file, img_width, img_height, class_mapping):
     tree = ET.parse(xml_file)
     root = tree.getroot()
@@ -40,23 +48,24 @@ class_mapping = {
     'A14' : 13, 'A15' : 14, 'A16' : 15, 'A17' : 16, 'A18' : 17, 'A19' : 18
 }
 
-if __name__ == '__main__'
-
-    data_dir =  '/Users/work/Data/Planes/archive/' 
-
+if __name__ == '__main__':
+    data_dir =  Path(r'/Users/work/Data/Planes')
+    xml_dir = data_dir / 'Annotations' / 'Horizontal Bounding Boxes' 
     # Iterate through XML files in the directory
     for xml_filename in os.listdir(xml_dir):
         if xml_filename.endswith('.xml'):
             xml_path = os.path.join(xml_dir, xml_filename)
             xml_name = xml_filename.replace('.xml', '') 
 
-            if os.path.exists( data_dir + f'Test/{xml_name}.jpg'):
-                image = cv2.imread(data_dir + f'Test/{xml_name}.jpg')
+            if os.path.exists(data_dir / 'Test' /  f'{xml_name}.jpg'):
+                image = cv2.imread(str(data_dir / 'Test' / f'{xml_name}.jpg'))
                 img_height, img_width, _ = image.shape
+                output_dir = data_dir / 'Test'
 
             else:
-                image = cv2.imread(data_dir + f'Train/{xml_name}.jpg')
+                image = cv2.imread(str(data_dir / 'Train' / f'{xml_name}.jpg'))
                 img_height, img_width, _ = image.shape
+                output_dir = data_dir / 'Train'
 
             yolo_lines = convert_xml_to_yolo(xml_path, img_width, 
                                             img_height, class_mapping
