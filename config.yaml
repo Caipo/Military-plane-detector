@@ -1,6 +1,10 @@
 path: /Users/work/Data/Planes/archive
 train: Train/ 
-val: Train/
+val: Test/
+task: detect
+batch: 16
+imgsz: 640
+optimizer: auto
 
 names: 
     0 : 'A1'
