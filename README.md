@@ -19,3 +19,5 @@ Done in the note book
 
 ## Example 
 <img src='https://i.imgur.com/NL7eRCn.jpg'>
+
+educational use only
